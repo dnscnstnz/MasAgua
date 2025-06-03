@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Detalle Pedido - MasAgua</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Manrope', 'sans-serif'] },
+          colors: {
+            darkBlue: '#1e293b',
+            lightBlue: '#7dd3fc',
+            hoverBlue: '#38bdf8',
+            bgLight: '#f4f6f8',
+            textDark: '#1f2937',
+          }
+        }
+      }
+    };
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body class="bg-bgLight text-textDark font-sans">
+
+  <header class="bg-darkBlue text-white shadow-md">
+    <div class="container mx-auto flex justify-between items-center p-4">
+      <h1 class="text-2xl font-bold tracking-wide">MasAgua</h1>
+      <nav class="space-x-6 hidden md:flex text-sm uppercase">
+        <a href="/cliente/pedido" class="hover:text-lightBlue">Hacer Pedido</a>
+        <a href="/cliente/pedido/detalle" class="hover:text-lightBlue font-bold">Detalle Pedido</a>
+        <a href="/logout" class="hover:text-lightBlue">Salir</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="py-20 bg-[#f9fafb]">
+    <div class="container mx-auto px-4">
+      <% if (!pedido) { %>
+        <p class="text-center text-gray-600 text-xl">No tienes pedidos realizados aún.</p>
+      <% } else { %>
+        <h2 class="text-3xl font-bold text-darkBlue mb-4">Pedido ID: <%= pedido.id %></h2>
+        <p class="mb-8">Estado: <strong><%= pedido.estado %></strong> | Fecha: <%= new Date(pedido.fecha).toLocaleString() %></p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 items-stretch">
+          <% productos.forEach(prod => { %>
+            <div class="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition flex flex-col justify-between h-full">
+              <img src="<%= prod.imagen %>" alt="<%= prod.nombre %>" class="mx-auto mb-4 w-32" />
+              <h3 class="text-xl font-semibold"><%= prod.nombre %></h3>
+              <p class="text-gray-600"><%= prod.descripcion %></p>
+              <p class="mt-2">Cantidad: <strong><%= prod.cantidad %></strong></p>
+              <span class="text-lightBlue text-lg font-bold">$<%= (prod.precio * prod.cantidad).toLocaleString() %></span>
+            </div>
+          <% }) %>
+        </div>
+      <% } %>
+    </div>
+  </section>
+
+  <footer class="bg-darkBlue text-white py-8 mt-16">
+    <div class="container mx-auto px-4 text-center text-sm opacity-80">
+      <p>&copy; 2025 MasAgua. Hidratación con propósito. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
