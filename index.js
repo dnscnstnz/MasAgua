@@ -9,6 +9,7 @@ const clienteRoutes = require('./routes/cliente');
 const empresaRoutes = require('./routes/empresa');
 const flotaRoutes = require('./routes/flota');
 const choferesRouter = require('./routes/choferes');
+const misPedidosRoutes = require('./routes/mis-pedidos');
 
 const app = express();
 const PORT = 3000;
@@ -263,6 +264,7 @@ app.use('/cliente', clienteRoutes);
 app.use('/empresa', empresaRoutes);
 app.use('/flota', flotaRoutes);
 app.use('/choferes', choferesRouter);
+app.use('/', misPedidosRoutes);
 
 
 // Ruta para probar conexión DB

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mis pedidos</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mis pedidos</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (pedidos.length === 0) { %>
+        <tr>
+          <td colspan="4">No tienes pedidos aún.</td>
+        </tr>
+      <% } else { %>
+        <% pedidos.forEach(pedido => { %>
+          <tr>
+            <td><%= pedido.producto %></td>
+            <td><%= pedido.cantidad %></td>
+            <td><%= new Date(pedido.fecha).toLocaleString('es-CL') %></td>
+            <td><%= pedido.estado %></td>
+          </tr>
+        <% }) %>
+      <% } %>
+    </tbody>
+  </table>
+</body>
+</html>
